@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package newpackagest.schoepfer.dicom2pdf.pdf.handler;
+package st.schoepfer.dicom2pdf.pdf.handler;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
