@@ -5,12 +5,8 @@
  */
 package st.schoepfer.dicom2pdf.pdf.handler;
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
 
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -22,14 +18,7 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.xobject.PDJpeg;
 import org.apache.pdfbox.pdmodel.graphics.xobject.PDXObjectImage;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.Writer;
-// import com.google.zxing.client.j2se.MatrixToImageWriter;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.oned.Code128Writer;
-import com.google.zxing.oned.Code39Writer;
-import com.google.zxing.qrcode.QRCodeWriter;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
+
 
 /**
  *

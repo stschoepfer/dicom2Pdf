@@ -7,31 +7,44 @@ package st.schoepfer.dicom2pdf.dicom.handler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import org.dcm4che2.data.DicomElement;
+import org.dcm4che2.data.Tag;
 
 
 /**
  *
  * @author Stefan
  */
-public class PatientInfoHandler {
-    	File theDicomFile;
+public class PatientInfoHandler  extends AtrributeHandler{
+    File theDicomFile;
+
+    public PatientInfoHandler(File aDicomFile) {
+        super(aDicomFile);
+    }
 	
-        /**
-         * 
-         * @param dicomFilePath
-         * @throws FileNotFoundException 
-         */
-	public PatientInfoHandler(String dicomFilePath) throws FileNotFoundException {
-		this.theDicomFile = new File(dicomFilePath);
-		
-		if (!theDicomFile.exists()) {
-			throw new FileNotFoundException();
-		}
-		
-		ImageIO.scanForPlugins();
-	}
+
         
+    public String getPatientIDFromDicom() {
+        final int TAG = 1048608;      
+        return super.dmObject.getString(TAG);   
+    }
+    
+    public String getPatientNameFromDicom() {
+        final int TAG = 1048592;;
+        return super.dmObject.getString(TAG);      
+    }
+
+    public Date getPatientBirthdateFromDicom() throws IOException {
+        final int TAG = 1048624;
+        return super.dmObject.getDate(TAG);
+    }            
 
 	
 }

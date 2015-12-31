@@ -17,6 +17,11 @@ import javax.imageio.ImageReadParam;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
+import org.dcm4che2.imageio.plugins.dcm.DicomImageReadParam;
+import com.sun.image.codec.jpeg.JPEGCodec;
+import com.sun.image.codec.jpeg.JPEGImageEncoder;
+
+
 /**
  *
  * @author Stefan
@@ -32,6 +37,7 @@ public class ImageHandler {
 	public ImageHandler(File aDicomFile) {
 		this.theDicomFile = aDicomFile;
 		ImageIO.scanForPlugins();
+                
 	}
     
         /**
@@ -42,16 +48,15 @@ public class ImageHandler {
 	public BufferedImage getBufferdImageFile() throws IOException {
 		BufferedImage myJpegImage = null;
 		ImageInputStream iis = null;
-		
+		ImageIO.scanForPlugins();
+
 		Iterator<ImageReader> iter = ImageIO.getImageReadersByFormatName("dicom");
-		ImageReader reader = (ImageReader) iter.next();
-		ImageReadParam param = (ImageReadParam) reader.getDefaultReadParam();
-		
+                ImageReader reader = (ImageReader) iter.next();
+                ImageReadParam param = (ImageReadParam) reader.getDefaultReadParam();
 		
 		iis = ImageIO.createImageInputStream(theDicomFile);
 		reader.setInput(iis, false);   
 		myJpegImage =  reader.read(0, param); 
-		iis.close();
 		
 		return myJpegImage;
 	}
@@ -68,10 +73,9 @@ public class ImageHandler {
 		String strFullPath = path + "\\" + filePrefix + "_jpeg.jpg";
 		
 		
-		Iterator<ImageReader> iter = ImageIO.getImageReadersByFormatName("dicom");
+		Iterator<ImageReader> iter =  ImageIO.getImageReadersByFormatName("dicom");
 		ImageReader reader = (ImageReader) iter.next();
 		ImageReadParam param = (ImageReadParam) reader.getDefaultReadParam();
-		
 		
 		try {    
 			iis = ImageIO.createImageInputStream(theDicomFile);

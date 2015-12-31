@@ -6,6 +6,7 @@
 package st.schoepfer.dicom2pdf.dicom.handler;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,9 +16,13 @@ import static org.junit.Assert.*;
  *
  * @author Stefan
  */
-public class ImageHandlerIT {
+public class ImageHandlerTest {
+
+    // Because the file could contain medical information there will be no relative object to test it.
+    private final File dicomTestFile = new File("E:\\test.dcm");
     
-    public ImageHandlerIT() {
+    public ImageHandlerTest() {
+
     }
     
     @Before
@@ -28,32 +33,24 @@ public class ImageHandlerIT {
     public void tearDown() {
     }
 
-    /**
-     * Test of getBufferdImageFile method, of class ImageHandler.
-     */
-    @org.junit.Test
+    @Test
     public void testGetBufferdImageFile() throws Exception {
         System.out.println("getBufferdImageFile");
-        ImageHandler instance = null;
-        BufferedImage expResult = null;
+        ImageHandler instance = new ImageHandler(dicomTestFile);
         BufferedImage result = instance.getBufferdImageFile();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNotNull(result);
     }
 
-    /**
-     * Test of SaveImagesAsJPEG method, of class ImageHandler.
-     */
-    @org.junit.Test
+    @Test
     public void testSaveImagesAsJPEG() {
         System.out.println("SaveImagesAsJPEG");
-        String path = "";
-        String filePrefix = "";
-        ImageHandler instance = null;
+        String path = "E:\\"; // testPath.getPath();
+        String filePrefix = "testFile";
+        ImageHandler instance = new ImageHandler(this.dicomTestFile);
         instance.SaveImagesAsJPEG(path, filePrefix);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        File f = new File("E:\\" + filePrefix  + "_jpeg.jpg");
+        assertTrue(f.exists());
     }
     
 }
