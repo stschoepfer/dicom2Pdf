@@ -27,6 +27,8 @@ public class Observation {
     public Observation(String obserID, Date obserDate) {
         this.observationDate = obserDate;
         this.observationID = obserID;
+        
+        System.out.println("SCHNAUZ: " + this.observationDate.toString());
     }
 
     
@@ -36,7 +38,21 @@ public class Observation {
         this.caseID = caseID;
     }
     
+    public void setThreatingDoctor(String doc) {
+        this.threatingDoctor = doc;
+    }
     
+    public void setDescription(String desc) {
+        this.observetionDescripton = desc;
+    }
+    
+    public void setModality(String modality) {
+        this.modality = modality;
+    }
+    
+    public void setManufactur(String manufactur) {
+        this.manufactur = manufactur;
+    }
     public Date getObservationDate() {
         return this.observationDate;
     }

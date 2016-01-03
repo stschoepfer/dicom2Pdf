@@ -5,19 +5,15 @@
  */
 package st.schoepfer.dicom2pdf.dicom.handler;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
-import com.sun.xml.internal.fastinfoset.sax.AttributesHolder;
+
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
-import javax.imageio.ImageReader;
-import org.dcm4che2.data.DicomElement;
-import org.dcm4che2.data.DicomObject;
-import org.dcm4che2.data.SpecificCharacterSet;
-import org.dcm4che2.data.Tag;
-import static org.dcm4che2.data.Tag.Time;
-import org.dcm4che2.io.DicomInputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import st.schoepfer.dicom2pdf.dicom.entities.Observation;
+
 
 /**
  *
@@ -63,6 +59,34 @@ public class ObservationHandler extends AtrributeHandler{
      public String getStudyIDFromDicom() {
          final int TAG = 2097168;
          return super.dmObject.getString(TAG);
+     }
+     
+     public String getCaseIDFromDicom() {
+         final int TAG = 3670032;
+        try {
+            super.affichageDicomItem(super.dmObject, TAG);
+        } catch (IOException ex) {
+            Logger.getLogger(ObservationHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return super.dmObject.getString(TAG);
+     }
+     
+     public Observation getObservation() {
+
+         Calendar hr = Calendar.getInstance();
+         hr.setTime(this.getStudyTimeFromDicom());
+         
+         Calendar cal = Calendar.getInstance();
+         cal.setTime(this.getStudyDateFromDicom());
+         cal.set(cal.YEAR, cal.MONTH, cal.DATE, hr.HOUR, hr.MINUTE, hr.SECOND);
+         
+         
+         Observation obs = new Observation(this.getStudyIDFromDicom(), cal.getTime());
+         obs.setManufactur(this.getManufacturFromDicom());
+         obs.setModality(this.getModalityFromDicom());
+         obs.setThreatingDoctor(this.getThreatingDoctorFromDicom());
+         
+         return obs;
      }
 
 }

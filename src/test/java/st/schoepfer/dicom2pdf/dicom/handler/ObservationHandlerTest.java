@@ -13,6 +13,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import st.schoepfer.dicom2pdf.dicom.entities.Observation;
 
 /**
  *
@@ -93,6 +94,17 @@ public class ObservationHandlerTest {
         String expResult = "20150622-1207";
         String result = instance.getStudyIDFromDicom();
         assertEquals(expResult, result);
+    }
+
+
+    @Test
+    public void testGetObservation() {
+        System.out.println("getObservation");
+        Observation expResult = null;
+        Observation result = instance.getObservation();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
     
 }
