@@ -28,7 +28,7 @@ public class PdfFileHandler {
 	
 	private final int INITIAL_VALUE = 0;
 	private final int ERROR_VALUE = -1;
-	private final String IMAGE_FOLDER;
+	private String IMAGE_FOLDER;
 	PDDocument aFile;
 	String FileName;
 	
@@ -36,6 +36,10 @@ public class PdfFileHandler {
 		this.FileName = aFilename;
 		this.IMAGE_FOLDER = aImageFolder;
 	}
+
+	public PdfFileHandler(String aFilename) {
+		this.FileName = aFilename;
+	}        
 	
 	public String getFileName(){
 		return this.FileName;
