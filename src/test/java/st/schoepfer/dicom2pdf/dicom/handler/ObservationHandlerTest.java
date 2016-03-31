@@ -21,7 +21,7 @@ import st.schoepfer.dicom2pdf.dicom.entities.Observation;
  */
 public class ObservationHandlerTest {
     
-    private final File dicomTestFile = new File("E:\\test.dcm");  
+    private final File dicomTestFile = new File("C:\\dicom\\test.dcm");  
     ObservationHandler instance;
     
     SimpleDateFormat sdfDate = new SimpleDateFormat("ddMMyyyy");

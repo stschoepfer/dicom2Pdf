@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.util.Iterator;
 import org.dcm4che2.data.DicomElement;
 import org.dcm4che2.data.DicomObject;
-import org.dcm4che2.data.Tag;
-import org.dcm4che2.data.VR;
+import org.dcm4che3.data.Tag;
+import org.dcm4che3.data.VR;
 import org.dcm4che2.io.DicomInputStream;
 
 /**

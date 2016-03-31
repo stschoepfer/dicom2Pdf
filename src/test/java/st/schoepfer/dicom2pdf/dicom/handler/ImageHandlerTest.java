@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 public class ImageHandlerTest {
 
     // Because the file could contain medical information there will be no relative object to test it.
-    private final File dicomTestFile = new File("E:\\test.dcm");
+    private final File dicomTestFile = new File("C:\\dicom\\test.dcm");
     
     public ImageHandlerTest() {
 
@@ -44,12 +44,12 @@ public class ImageHandlerTest {
     @Test
     public void testSaveImagesAsJPEG() {
         System.out.println("SaveImagesAsJPEG");
-        String path = "E:\\"; // testPath.getPath();
+        String path = "C:\\dicom\\"; // testPath.getPath();
         String filePrefix = "testFile";
         ImageHandler instance = new ImageHandler(this.dicomTestFile);
         instance.SaveImagesAsJPEG(path, filePrefix);
         // TODO review the generated test code and remove the default call to fail.
-        File f = new File("E:\\" + filePrefix  + "_jpeg.jpg");
+        File f = new File("C:\\dicom\\" + filePrefix  + "_jpeg.jpg");
         assertTrue(f.exists());
     }
     

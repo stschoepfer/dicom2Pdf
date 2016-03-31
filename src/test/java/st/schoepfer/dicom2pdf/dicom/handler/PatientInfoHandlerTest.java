@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
  */
 public class PatientInfoHandlerTest {
     
-    private final File dicomTestFile = new File("E:\\test.dcm");
+    private final File dicomTestFile = new File("C:\\dicom\\test.dcm");
 
     
     public PatientInfoHandlerTest() {
