@@ -48,7 +48,7 @@ public class PdfFileHandler {
 	public void addTextAtPosition(String newText, int x, int y) {
 		this.loadPDFFile();
         PDFont font = PDType1Font.HELVETICA_BOLD;
-        float fontSize = 30.0f;
+        float fontSize = 12.0f;
         
 		try {
 			PDPageContentStream stream = new PDPageContentStream(this.aFile, this.getPageByNumber(1), true, true);
@@ -73,6 +73,36 @@ public class PdfFileHandler {
 		
 	}
 	
+        public void addTextAtPosition(PDFFont newFont, String newText, int x, int y) {
+	
+            this.loadPDFFile();
+        float fontSize = newFont.getSize();
+        
+		try {
+			PDPageContentStream stream = new PDPageContentStream(this.aFile, this.getPageByNumber(1), true, true);
+			
+			stream.beginText();
+			stream.setFont(newFont.getFont(), fontSize);
+			stream.setNonStrokingColor(newFont.getColor());
+			stream.moveTextPositionByAmount(x, y);
+			stream.drawString(newText);
+			stream.endText();
+			stream.close();
+			
+			
+			this.aFile.save(this.getFileName());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			this.closePDFFile();	
+		}
+		
+	}
+	
+        
+        
 	private void loadPDFFile() {
 		// Laded die gewünschte Datei.
 		// Wenn dabei ein Fehler auftritt wird ein neues Dokument mit einer leeren Seite geladen.

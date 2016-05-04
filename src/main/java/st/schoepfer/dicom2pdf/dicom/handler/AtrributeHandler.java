@@ -45,16 +45,25 @@ public class AtrributeHandler {
     public DicomElement affichageDicomItem(DicomObject object, int TAG) throws IOException
      {
          Iterator<DicomElement> iter = object.iterator();
-         
+         boolean hasFound = false;
+         DicomElement returnEl = null; 
          while(iter.hasNext()) {
             DicomElement element = iter.next();
-            System.out.println(element.tag() + " --- CHECK: " + element.toString());
+            // System.out.println(element.tag() + " --- CHECK: " + element.toString());
             int tag = element.tag(); 
              if(tag == TAG){
-                 return element;
+                 hasFound = true;
+                 returnEl = element;
+                 break;
              }
          }
-         return null;
+         
+         if (hasFound) {
+             System.out.println(TAG + " gefunden");
+         } else {
+             System.out.println(TAG + "NICHT!!!!!!!!!! gefunden");
+         }
+         return returnEl;
      }
     
 }

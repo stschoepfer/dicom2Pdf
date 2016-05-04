@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.dcm4che2.data.DicomElement;
 import st.schoepfer.dicom2pdf.dicom.entities.Observation;
 
 
@@ -63,12 +64,16 @@ public class ObservationHandler extends AtrributeHandler{
      
      public String getCaseIDFromDicom() {
          final int TAG = 3670032;
+         String caseID = "";
         try {
-            super.affichageDicomItem(super.dmObject, TAG);
+            DicomElement de = super.affichageDicomItem(super.dmObject, TAG);
+            caseID = super.dmObject.getString(TAG);
+
         } catch (IOException ex) {
-            Logger.getLogger(ObservationHandler.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(ObservationHandler.class.getName()).log(Level.SEVERE, null, ex);
+            caseID = "n/a";
         }
-         return super.dmObject.getString(TAG);
+         return caseID;
      }
      
      public Observation getObservation() {

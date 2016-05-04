@@ -27,9 +27,16 @@ public class Patient {
     public String getPatientPrename() {return this.patientPrename;}
     public String getPatientID() {return this.patientID;}
     public Date getPatientBirthdate() {return this.patientBirthdate;}
-    public void setPatientNameDemilited(String name, String demiliter, int posOfLastname) {
-        String[] names = name.split(demiliter);
+    public void setPatientNameDemilited(String name, String demil, int posOfLastname) {
         
+        String newDemiliter = demil;
+        if (newDemiliter.equals("^")) {
+          newDemiliter = "\\^";
+        }
+        
+        String[] names = name.split(newDemiliter);
+        
+       
         this.patientName = names[posOfLastname];
         
         int posOfPreName = -1;
