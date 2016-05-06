@@ -46,11 +46,12 @@ public class ImageHandler {
 		BufferedImage myJpegImage = null;
 		ImageInputStream iis = null;
 		ImageIO.scanForPlugins();
-
+                
 		Iterator<ImageReader> iter = ImageIO.getImageReadersByFormatName("dicom");
                 ImageReader reader = (ImageReader) iter.next();
                 ImageReadParam param = (ImageReadParam) reader.getDefaultReadParam();
-		
+
+                
 		iis = ImageIO.createImageInputStream(theDicomFile);
 		reader.setInput(iis, false);   
 		myJpegImage =  reader.read(0, param); 
@@ -67,7 +68,7 @@ public class ImageHandler {
 		
 		BufferedImage myJpegImage;
 		ImageInputStream iis = null;
-		String strFullPath = path + "\\" + filePrefix + "_jpeg.jpg";
+		String strFullPath = path + "\\" + filePrefix + ".jpg";
 		
 		
 		Iterator<ImageReader> iter =  ImageIO.getImageReadersByFormatName("dicom");

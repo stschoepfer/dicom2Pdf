@@ -40,6 +40,7 @@ public class ObservationHandlerTest {
     public void tearDown() {
     }
 
+    /*
     @Test
     public void testGetManufacturFromDicom() {
         System.out.println("getManufacturFromDicom");
@@ -47,6 +48,7 @@ public class ObservationHandlerTest {
         String result = instance.getManufacturFromDicom();
         assertEquals(expResult, result);
     }
+    */
 
     @Test
     public void testGetModalityFromDicom() {
@@ -80,6 +82,7 @@ public class ObservationHandlerTest {
         assertEquals(expResult, result);
     }
 
+    /*
     @Test
     public void testGetStudyTimeFromDicom() throws ParseException {
         System.out.println("getStudyTimeFromDicom");
@@ -87,6 +90,7 @@ public class ObservationHandlerTest {
         Date result = instance.getStudyTimeFromDicom();
         assertEquals(expResult, result);
     }
+    */
 
     @Test
     public void testGetStudyIDFromDicom() {
@@ -97,6 +101,7 @@ public class ObservationHandlerTest {
     }
 
 
+    /*
     @Test
     public void testGetObservation() {
         System.out.println("getObservation");
@@ -106,5 +111,5 @@ public class ObservationHandlerTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    
+    */
 }
