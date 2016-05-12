@@ -7,12 +7,13 @@ package st.schoepfer.dicom2pdf.dicom.handler;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
-import org.dcm4che2.data.DicomElement;
-import org.dcm4che2.data.DicomObject;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.dcm4che3.data.Attributes;
 import org.dcm4che3.data.Tag;
-import org.dcm4che3.data.VR;
-import org.dcm4che2.io.DicomInputStream;
+import org.dcm4che3.io.DicomInputStream;
+
 
 /**
  *
@@ -21,20 +22,27 @@ import org.dcm4che2.io.DicomInputStream;
 public class AtrributeHandler {
     File theDicomFile;
     DicomInputStream dicomInputStream;
-    DicomObject dmObject;
+    
     boolean isReady = false;
-
+    Attributes attri;
+    
     public AtrributeHandler(File aDicomFile) {
-        this.theDicomFile = aDicomFile;
-        
+        try {
+            this.theDicomFile = aDicomFile;
+            this.attri = this.getDicomAtributes();
+            this.dicomInputStream.close();
+        } catch (IOException ex) {
+            Logger.getLogger(AtrributeHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private Attributes getDicomAtributes() {
         try {
             dicomInputStream = new DicomInputStream(this.theDicomFile);
-            dmObject = dicomInputStream.readDicomObject();
-            dmObject.remove(Tag.PixelData);  
-            this.isReady = true;
-        } catch(Exception ex) {
-            System.err.println(ex.getMessage());
-            isReady = false;
+            return dicomInputStream.readDataset(-1, Tag.PixelData);
+            
+        }catch(Exception ex) {
+            return null;
         }
     }
     
@@ -42,28 +50,13 @@ public class AtrributeHandler {
         return this.isReady;
     }
     
-    public DicomElement affichageDicomItem(DicomObject object, int TAG) throws IOException
-     {
-         Iterator<DicomElement> iter = object.iterator();
-         boolean hasFound = false;
-         DicomElement returnEl = null; 
-         while(iter.hasNext()) {
-            DicomElement element = iter.next();
-            // System.out.println(element.tag() + " --- CHECK: " + element.toString());
-            int tag = element.tag(); 
-             if(tag == TAG){
-                 hasFound = true;
-                 returnEl = element;
-                 break;
-             }
-         }
-         
-         if (hasFound) {
-             System.out.println(TAG + " gefunden");
-         } else {
-             System.out.println(TAG + "NICHT!!!!!!!!!! gefunden");
-         }
-         return returnEl;
-     }
+    public String getElementAsString(int tagID) {
+       return this.attri.getString(tagID);
+    }
+    
+    public Date getElementAsDate(int tagID) {
+       return this.attri.getDate(tagID);
+    }
+    
     
 }

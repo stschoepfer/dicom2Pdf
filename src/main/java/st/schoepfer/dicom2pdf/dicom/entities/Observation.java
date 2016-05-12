@@ -17,6 +17,7 @@ public class Observation {
     private final SimpleDateFormat datePrintFormat = new SimpleDateFormat("dd.MM.yyyy");
     
     Date observationDate;
+    Date observationDateTime;
     String caseID;
     String threatingDoctor;
     String observetionDescripton;
@@ -55,6 +56,14 @@ public class Observation {
     }
     public Date getObservationDate() {
         return this.observationDate;
+    }
+    
+    public void setObservationDateTime(Date aDate) {
+        this.observationDateTime = aDate;
+    }
+    
+    public Date getObservationDateTime() {
+        return this.observationDateTime;
     }
     
     public String getObservationDateAsString() {

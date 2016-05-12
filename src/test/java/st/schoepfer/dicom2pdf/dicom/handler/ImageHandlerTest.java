@@ -52,5 +52,4 @@ public class ImageHandlerTest {
         File f = new File("C:\\dicom\\" + filePrefix  + "_jpeg.jpg");
         assertTrue(f.exists());
     }
-    
 }

@@ -12,7 +12,26 @@
         <url>http://www.dcm4che.org/maven2</url>
       </repository>
     </repositories> 
-        
+  <pluginRepositories>
+    <pluginRepository>
+      <id>Apache Snapshots</id>
+      <url>http://people.apache.org/repo/m2-snapshot-repository</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </pluginRepository>
+  </pluginRepositories>
+  <distributionManagement>
+    <repository>
+      <id>www.dcm4che.org</id>
+      <name>dcm4che Repository</name>
+      <url>scp://www.dcm4che.org:443/home/maven2</url>
+    </repository>
+  </distributionManagement>
+          
     <dependencies>
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
@@ -42,11 +61,6 @@
             <type>pom</type>
         </dependency>
         <dependency>
-            <groupId>dcm4che</groupId>
-            <artifactId>dcm4che-imageio</artifactId>
-            <version>2.0.29</version>
-        </dependency>
-        <dependency>
             <groupId>com.sun.media</groupId>
             <artifactId>jai_imageio</artifactId>
             <version>1.1</version>
@@ -71,7 +85,13 @@
         <dependency>
             <groupId>org.dcm4che</groupId>
             <artifactId>dcm4che-core</artifactId>
-            <version>2.0.24</version>
+            <version>3.3.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.dcm4che</groupId>
+            <artifactId>dcm4che-imageio</artifactId>
+            <version>3.3.7</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
     <properties>
@@ -110,32 +130,44 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>2.4.1</version>
-				<configuration>
-					<!-- get all project dependencies -->
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-					<!-- MainClass in mainfest make a executable jar -->
-					<archive>
-					  <manifest>
-						<mainClass>com.mkyong.core.utils.App</mainClass>
-					  </manifest>
-					</archive>
-
-				</configuration>
 				<executions>
 				  <execution>
 					<id>make-assembly</id>
                                         <!-- bind to the packaging phase -->
 					<phase>package</phase> 
 					<goals>
-						<goal>single</goal>
+                                            <goal>single</goal>
 					</goals>
+                                        <configuration>
+                                            <!-- get all project dependencies -->
+                                            <descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+                                            </descriptorRefs>
+                                        </configuration>                                        
 				  </execution>
 				</executions>
 			</plugin>
-
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-shade-plugin</artifactId>
+                            <version>1.6</version>
+                            <executions>
+                                <execution>
+                                    <phase>package</phase>
+                                    <goals>
+                                        <goal>shade</goal>
+                                    </goals>
+                                    <configuration>
+                                        <!-- MainClass in mainfest make a executable jar -->
+                                        <archive>
+                                              <descriptorRefs>
+						<descriptorRef>jar-with-shades</descriptorRef>
+                                            </descriptorRefs>
+                                         </archive>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                        </plugin>
 		</plugins>
 	</build>
-    
 </project>

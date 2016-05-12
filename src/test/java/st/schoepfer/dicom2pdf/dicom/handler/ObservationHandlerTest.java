@@ -13,7 +13,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import st.schoepfer.dicom2pdf.dicom.entities.Observation;
+
 
 /**
  *
@@ -40,15 +40,16 @@ public class ObservationHandlerTest {
     public void tearDown() {
     }
 
-    /*
+
     @Test
     public void testGetManufacturFromDicom() {
         System.out.println("getManufacturFromDicom");
-        String expResult = "THOSHIBA_MEC_US";
+        String expResult = "TOSHIBA_MEC_US";
         String result = instance.getManufacturFromDicom();
         assertEquals(expResult, result);
     }
-    */
+
+
 
     @Test
     public void testGetModalityFromDicom() {
@@ -58,6 +59,7 @@ public class ObservationHandlerTest {
         assertEquals(expResult, result);
     }
 
+
     @Test
     public void testGetThreatingDoctorFromDicom() {
         System.out.println("getThreatingDoctorFromDicom");
@@ -65,6 +67,7 @@ public class ObservationHandlerTest {
         String result = instance.getThreatingDoctorFromDicom();
         assertEquals(expResult, result);
     }
+    
 
     @Test
     public void testGetClinicFromDicom() {
@@ -82,6 +85,7 @@ public class ObservationHandlerTest {
         assertEquals(expResult, result);
     }
 
+
     /*
     @Test
     public void testGetStudyTimeFromDicom() throws ParseException {
@@ -92,6 +96,7 @@ public class ObservationHandlerTest {
     }
     */
 
+    
     @Test
     public void testGetStudyIDFromDicom() {
         System.out.println("getStudyIDFromDicom");
@@ -99,17 +104,5 @@ public class ObservationHandlerTest {
         String result = instance.getStudyIDFromDicom();
         assertEquals(expResult, result);
     }
-
-
-    /*
-    @Test
-    public void testGetObservation() {
-        System.out.println("getObservation");
-        Observation expResult = null;
-        Observation result = instance.getObservation();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    */
+    
 }

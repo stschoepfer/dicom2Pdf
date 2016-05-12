@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.dcm4che3.data.Tag;
 import st.schoepfer.dicom2pdf.dicom.entities.Patient;
 
 
@@ -25,18 +26,18 @@ public class PatientInfoHandler  extends AtrributeHandler{
     }
 	
     public String getPatientIDFromDicom() {
-        final int TAG = 1048608;      
-        return super.dmObject.getString(TAG);   
+        final int TAG = Tag.PatientID;      
+        return super.getElementAsString(TAG);   
     }
     
     public String getPatientNameFromDicom() {
-        final int TAG = 1048592;;
-        return super.dmObject.getString(TAG);      
+        final int TAG = Tag.PatientName;
+        return super.getElementAsString(TAG);      
     }
 
     public Date getPatientBirthdateFromDicom() throws IOException {
-        final int TAG = 1048624;
-        return super.dmObject.getDate(TAG);
+        final int TAG = Tag.PatientBirthDate;
+        return super.getElementAsDate(TAG);
     }
     
     public Patient getPatient() {

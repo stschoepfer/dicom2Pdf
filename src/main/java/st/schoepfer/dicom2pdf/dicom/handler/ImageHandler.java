@@ -12,12 +12,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReadParam;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
-
-
+import org.dcm4che3.imageio.codec.ImageReaderFactory;
+import org.dcm4che3.io.DicomInputStream;
+import org.dcm4che3.io.DicomOutputStream;
 
 /**
  *
@@ -26,6 +29,7 @@ import javax.imageio.stream.ImageInputStream;
 public class ImageHandler {
          
     File theDicomFile;
+    ImageInputStream iis = null;
     
          /**
          * 
@@ -36,7 +40,7 @@ public class ImageHandler {
 		ImageIO.scanForPlugins();
                 
 	}
-    
+          
         /**
          * 
          * @return
@@ -44,7 +48,6 @@ public class ImageHandler {
          */
 	public BufferedImage getBufferdImageFile() throws IOException {
 		BufferedImage myJpegImage = null;
-		ImageInputStream iis = null;
 		ImageIO.scanForPlugins();
                 
 		Iterator<ImageReader> iter = ImageIO.getImageReadersByFormatName("dicom");
@@ -67,19 +70,11 @@ public class ImageHandler {
 	public void SaveImagesAsJPEG(String path, String filePrefix) {
 		
 		BufferedImage myJpegImage;
-		ImageInputStream iis = null;
 		String strFullPath = path + "\\" + filePrefix + ".jpg";
 		
-		
-		Iterator<ImageReader> iter =  ImageIO.getImageReadersByFormatName("dicom");
-		ImageReader reader = (ImageReader) iter.next();
-		ImageReadParam param = (ImageReadParam) reader.getDefaultReadParam();
-		
 		try {    
-			iis = ImageIO.createImageInputStream(theDicomFile);
-			reader.setInput(iis, false);   
-			myJpegImage =  reader.read(0, param); 
-			// iis.close();
+                        myJpegImage =  this.getBufferdImageFile();
+			
 			
 			if (myJpegImage == null) 
 			{
@@ -87,7 +82,8 @@ public class ImageHandler {
 			}
 			
 			File myJpegFile = new File(strFullPath);   
-			OutputStream output = new BufferedOutputStream(new FileOutputStream(myJpegFile));
+			OutputStream output;
+                        output = new BufferedOutputStream(new FileOutputStream(myJpegFile));
 			ImageIO.write(myJpegImage, "jpeg", output);
 			output.close();
 			
@@ -104,4 +100,5 @@ public class ImageHandler {
 			}
 		}
 	}
+
 }
